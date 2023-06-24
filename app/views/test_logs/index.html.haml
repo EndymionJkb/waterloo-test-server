@@ -1,0 +1,32 @@
+- provide(:title, 'Logs')
+.c_customer.afclr
+  .wrapper
+    .re_main.afclr
+      .ab_head.afclr
+        - if @user.nil?
+          %h1 Tests taken
+        - else
+          %h1== "Tests taken by #{@user.address}"
+      .in_iner_pag.afclr
+        %table.table.table-striped
+          %thead
+            %tr
+              %th Log ID
+              %th User
+              %th Test
+              %th Passed
+              %th Score
+              %th
+          %tbody
+            - @logs.each do |log|
+              %tr
+                %td= log.id
+                %td
+                  - if @user.nil?
+                    - @user = User.find_by_id(log.user_id)
+                    = @user.nil? ? "Unknown" : @user.address
+                %td= Assessment.find_by_id(log.assessment_id).topic
+                %td= log.passed
+                %td= log.score
+                %td= button_to 'Delete', log, :method => :delete      
+        .center

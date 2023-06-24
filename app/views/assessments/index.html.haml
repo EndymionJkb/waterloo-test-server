@@ -23,5 +23,5 @@
                 %td= t.advanced ? 'Advanced' : 'Simple'
                 %td= t.num_questions
                 %td= t.has_content? ? 'Yes' : 'No'
-                %td= link_to 'Delete', t, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-secondary'         
+                %td= button_to 'Delete', t, :method => :delete        
         .center

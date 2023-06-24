@@ -1,0 +1,20 @@
+- provide(:title, 'Users')
+.c_customer.afclr
+  .wrapper
+    .re_main.afclr
+      .ab_head.afclr
+        %h1 Users
+      .in_iner_pag.afclr
+        %table.table.table-striped
+          %thead
+            %tr
+              %th ID
+              %th Address
+              %th
+          %tbody
+            - @users.each do |u|
+              %tr
+                %td= u.id
+                %td= u.address
+                %td= button_to 'Delete', u, :method => :delete      
+        .center

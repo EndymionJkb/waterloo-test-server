@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root to: 'static_pages#home'
 
   resources :assessments
+  resources :users, :only => [:index, :destroy]
+  resources :test_logs, :only => [:index, :destroy]
 
   get '/available_tests', to: 'assessments#available_tests'
   get '/get_questions', to: 'assessments#get_questions'
