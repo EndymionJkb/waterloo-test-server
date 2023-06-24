@@ -26,7 +26,7 @@ gem 'devise', '4.8.1'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'haml', '5.1.2'
-
+gem "ruby-openai" , '4.2.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
