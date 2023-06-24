@@ -58,7 +58,7 @@ class AssessmentsController < ApplicationController
     @test = Assessment.find(params[:id])
     @test.destroy
     
-    redirect_to tests_path, :notice => 'Test successfully deleted'    
+    redirect_to assessments_path, :notice => 'Test successfully deleted'    
   end
   
   # Get a list of the tests that are available
