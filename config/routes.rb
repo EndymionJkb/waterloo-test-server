@@ -6,4 +6,5 @@ Rails.application.routes.draw do
 
   get '/available_tests', to: 'assessments#available_tests'
   get '/get_questions', to: 'assessments#get_questions'
+  post '/score_test', to: 'assessments#score_test'
 end
