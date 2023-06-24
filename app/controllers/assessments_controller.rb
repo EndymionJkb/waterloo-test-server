@@ -38,6 +38,7 @@ class AssessmentsController < ApplicationController
     
     begin
       @test.assign_attributes(test_params)
+      @test.content = OpenAIChat.instance.generate_prompt(@test.topic, @test.num_questions, @test.advanced)
 
       if @test.save
         redirect_to assessments_path, :notice => 'Test successfully updated'
