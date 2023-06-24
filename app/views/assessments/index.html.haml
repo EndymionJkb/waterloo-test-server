@@ -1,0 +1,27 @@
+- provide(:title, 'Assessments')
+.c_customer.afclr
+  .wrapper
+    .re_main.afclr
+      .ab_head.afclr
+        %h1 Available Tests
+        %br= link_to 'Add Test', new_assessment_path, :class => 'btn btn-primary'
+      .in_iner_pag.afclr
+        %table.table.table-striped
+          %thead
+            %tr
+              %th ID
+              %th Topic
+              %th Level
+              %th Questions
+              %th Generated?
+              %th
+          %tbody
+            - @tests.each do |t|
+              %tr
+                %td= t.id
+                %td= link_to t.topic, edit_assessment_path(t)
+                %td= t.advanced ? 'Advanced' : 'Simple'
+                %td= t.num_questions
+                %td= t.has_content? ? 'Yes' : 'No'
+                %td= link_to 'Delete', t, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-secondary'         
+        .center

@@ -1,0 +1,14 @@
+- provide(:title, 'New Client')
+.c_customer.afclr
+  .wrapper
+    .re_main.afclr
+      .ab_head.afclr
+        %h1 New Client
+      .in_iner_pag.afclr
+        = form_for @test do |f|
+          = render :partial => 'shared/generic_error_messages', :locals => { :errors => @test.errors, :name => 'Test' }
+          = render :partial => 'test_fields', :locals => { :f => f }
+          .actions
+            = f.submit 'Create Test', :class => 'btn btn-primary'
+            %br
+            = link_to 'Back', assessments_path

@@ -1,0 +1,20 @@
+- provide(:title, 'Edit/Update Test')
+.c_customer.afclr
+  .wrapper
+    .re_main.afclr
+      .ab_head.afclr
+        %h1== Generate test on '#{@test.topic}'
+      .in_iner_pag.afclr
+        %h3 Current Questions and Answers
+        - if @test.content.blank?
+          No content yet
+        - else
+          = @test.content
+        %br
+        = form_for @test do |f|
+          = render :partial => 'shared/generic_error_messages', :locals => { :errors => @test.errors, :name => 'Test' }
+          = render :partial => 'test_fields', :locals => { :f => f }
+          .actions
+            = f.submit 'Update Test', :class => 'btn btn-primary'
+          %br
+          = link_to 'Done', assessments_path

@@ -1,0 +1,9 @@
+.field
+  = f.label :topic, 'Test topic'
+  = f.text_field :topic
+.field
+  = f.label :num_questions, 'How many questions'
+  = f.number_field :num_questions, :min => 3, :max => 10
+.field
+  = f.check_box :advanced
+  = f.label :advanced, :style => 'display:inline'
