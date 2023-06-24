@@ -59,6 +59,34 @@ class AssessmentsController < ApplicationController
     redirect_to tests_path, :notice => 'Test successfully deleted'    
   end
   
+  def available_tests
+    text_data = Assessment.order(:topic).map(&:topic).join(',')
+
+    render plain: text_data, content_type: 'text/plain'
+  end
+
+  def get_questions
+    test_id = params[:id]
+
+    test = Assessment.find_by_id(test_id)
+    result = {"ERROR": "Test not found"}
+
+    unless test.nil?
+      obj = JSON.parse(test.content)
+      result = []
+      obj.each do |q|
+        o = {}
+        q.keys.each do |k|
+          next if k == 'answer'
+          o[k] = q[k]
+        end 
+        result.push(o)
+      end
+    end
+
+    render :json => result, content_type: 'application/json'
+  end
+
 private
   def test_params
     puts params

@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :assessments
 
   get '/available_tests', to: 'assessments#available_tests'
-  get '/get_test', to: 'assessments#get_test'
+  get '/get_questions', to: 'assessments#get_questions'
 end
