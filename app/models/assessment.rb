@@ -38,7 +38,7 @@ class Assessment < ApplicationRecord
     # Prepare the request
     request = Net::HTTP::Post.new(url)
     request["Content-Type"] = 'application/json'
-    request.body = "{\"id\": \"#{assessment_id}\"}"
+    request.body = "{\"id\": \"#{self.id}\"}"
     
     response = http.request(request)
     puts response.read_body
