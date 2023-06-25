@@ -99,7 +99,7 @@ class AssessmentsController < ApplicationController
   # Results are in the form of test id, address of user, [{questionId, choice}]
   def score_test
     puts params
-    
+
     a = Assessment.find_by_id(params[:id])
     if a.nil?
       status = "ERROR: Test not found"
@@ -111,7 +111,7 @@ class AssessmentsController < ApplicationController
       else
         user = User.find_by_address(user_id)
         if user.nil?
-          User.create(:address => user_id)
+          user = User.create(:address => user_id)
         end
 
         n = a.num_questions.to_f
