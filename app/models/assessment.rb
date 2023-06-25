@@ -1,6 +1,6 @@
-require 'uri'
 require 'net/http'
 require 'openssl'
+require 'uri'
 
 # == Schema Information
 #
@@ -30,8 +30,7 @@ class Assessment < ApplicationRecord
   def notify_test_added
     base_url = ENV['METACERT_EXPRESS_ENDPOINT']
 
-    url = URI("#{base_url}/addtest")
-
+    url = URI.parse("#{base_url}/addtest")
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
