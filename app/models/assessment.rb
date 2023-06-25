@@ -34,7 +34,7 @@ class Assessment < ApplicationRecord
     
     # Prepare the request
     request = Net::HTTP::Post.new(url.path)
-    request.set_form_data({ courseId: self.id })
+    request.set_form_data({ id: self.id })
     
     # Send the request and get the response
     response = http.request(request)
