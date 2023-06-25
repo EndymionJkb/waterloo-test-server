@@ -34,7 +34,12 @@ class Assessment < ApplicationRecord
       obj = JSON.parse(self.content)
       result = ''
       obj.each do |q|
-        result += "#{q['question']}<br>"
+        result += "#{q['question']}&nbsp;&nbsp;("
+        q['choices'].each do |c|
+          result += "#{c['choice']}, "
+        end
+        result = result[0..result.length-3]
+        result += ")<br>"
       end
 
       result
