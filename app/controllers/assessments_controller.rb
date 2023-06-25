@@ -98,6 +98,8 @@ class AssessmentsController < ApplicationController
 
   # Results are in the form of test id, address of user, [{questionId, choice}]
   def score_test
+    puts params
+    
     a = Assessment.find_by_id(params[:id])
     if a.nil?
       status = "ERROR: Test not found"
