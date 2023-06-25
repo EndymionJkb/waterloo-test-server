@@ -35,9 +35,10 @@ class Assessment < ApplicationRecord
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     
+    # Prepare the request
     request = Net::HTTP::Post.new(url)
     request["Content-Type"] = 'application/json'
-    request.body = "{\n\t\"id\": #{self.id}\n}"
+    request.body = "{\"id\": \"#{assessment_id}\""
     
     response = http.request(request)
     puts response.read_body
