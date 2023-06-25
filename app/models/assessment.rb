@@ -1,3 +1,5 @@
+require 'net/http'
+
 # == Schema Information
 #
 # Table name: assessments
@@ -21,5 +23,21 @@ class Assessment < ApplicationRecord
     else
       self.content.include?('"question"')
     end
+  end
+
+  def notify_test_added
+    base_url = ENV['METACERT_EXPRESS_ENDPOINT']
+
+    url = URI.parse("#{base_url}/addtest")
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = false
+    
+    # Prepare the request
+    request = Net::HTTP::Post.new(url.path)
+    request.set_form_data({ courseId: self.id })
+    
+    # Send the request and get the response
+    response = http.request(request)
+    puts response.inspect
   end
 end

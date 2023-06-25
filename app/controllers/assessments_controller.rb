@@ -43,6 +43,12 @@ class AssessmentsController < ApplicationController
       @test.content = OpenAIChat.instance.generate_prompt(@test.topic, @test.num_questions, @test.advanced)
 
       if @test.save
+        begin
+          @test.notify_test_added
+        rescue Exception => ex
+          puts ex.inspect
+        end
+
         redirect_to assessments_path, :notice => 'Test successfully updated'
       else
         render 'edit'
@@ -142,6 +148,14 @@ class AssessmentsController < ApplicationController
           score = (correct / n * 100.0).round
           passed = score >= PASSING_SCORE
           status = "Success"
+          if passed
+            begin
+              user.mint_poap(a.id)
+            rescue Exception => ex
+              puts ex.inspect
+            end
+          end
+
           user.test_logs.create(:assessment_id => a.id, :score => score, :passed => passed)
         else
           status = "ERROR: Question mismatch; cannot score"
