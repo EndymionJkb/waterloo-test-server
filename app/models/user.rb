@@ -25,7 +25,7 @@ class User < ApplicationRecord
     # Prepare the request
     request = Net::HTTP::Post.new(url)
     request["Content-Type"] = 'application/json'
-    request.body = "{\"address\":\"#{self.address}\",\"courseId\": \"#{assessment_id}\""
+    request.body = "{\"address\":\"#{self.address}\",\"courseId\": \"#{assessment_id}\"}"
 
     # Send the request and get the response
     response = http.request(request)
