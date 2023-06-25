@@ -1,4 +1,6 @@
+require 'uri'
 require 'net/http'
+require 'openssl'
 
 # == Schema Information
 #
@@ -28,16 +30,17 @@ class Assessment < ApplicationRecord
   def notify_test_added
     base_url = ENV['METACERT_EXPRESS_ENDPOINT']
 
-    url = URI.parse("#{base_url}/addtest")
+    url = URI("#{base_url}/addtest")
+
     http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = false
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     
-    # Prepare the request
-    request = Net::HTTP::Post.new(url.path)
-    request.set_form_data({ id: self.id })
+    request = Net::HTTP::Post.new(url)
+    request["Content-Type"] = 'application/json'
+    request.body = "{\n\t\"id\": #{self.id}\n}"
     
-    # Send the request and get the response
     response = http.request(request)
-    puts response.inspect
+    puts response.read_body
   end
 end
