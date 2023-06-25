@@ -27,6 +27,20 @@ class Assessment < ApplicationRecord
     end
   end
 
+  def question_display
+    if self.content.blank?
+      ""
+    else
+      obj = JSON.parse(self.content)
+      result = ''
+      obj.each do |q|
+        result += "#{q['question']}<br>"
+      end
+
+      result
+    end
+  end
+
   def notify_test_added
     base_url = ENV['METACERT_EXPRESS_ENDPOINT']
 

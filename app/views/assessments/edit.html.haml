@@ -5,11 +5,11 @@
       .ab_head.afclr
         %h1== Generate test on '#{@test.topic}'
       .in_iner_pag.afclr
-        %h3 Current Questions and Answers
+        %h3 Current Questions
         - if @test.content.blank?
           No content yet
         - else
-          = @test.content
+          = @test.question_display.html_safe
         %br
         = form_for @test do |f|
           = render :partial => 'shared/generic_error_messages', :locals => { :errors => @test.errors, :name => 'Test' }
